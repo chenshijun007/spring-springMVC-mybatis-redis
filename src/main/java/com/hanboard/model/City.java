@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by csj on 2017/8/18.
  */
-public class City  implements Serializable{
+public class City extends Throwable implements Serializable{
 
     private  String id;
     private  String cityName;

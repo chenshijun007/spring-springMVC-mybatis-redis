@@ -1,17 +1,17 @@
 package com.hanboard.service;
 
-import com.hanboard.dao.RedisDao;
 
-
+import com.hanboard.dao.mysql.RedisDao;
+import com.hanboard.dao.oracle.RedisOracleDao;
 import com.hanboard.model.City;
-import com.hanboard.util.RedisUtil;
-import com.hanboard.utils.RedisUtils;
+import com.hanboard.motan.HelloResource;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -25,9 +25,19 @@ public class RedisService {
    @Autowired
    RedisUtil redisUtil;*/
     @Autowired
-    RedisDao redisDao;
-   // @Cacheable(key = "#userId",value = "andCache")
-    public String redisSelect(String userId){
+    RedisDao redisMysqlDao;
+
+    @Autowired
+    private BeanFactory beanFactory;
+
+    @Autowired
+    RedisOracleDao redisOracleDao;
+
+ //  @Cacheable(key = "#userId",value = "andCache")
+    public List<City> redisSelect(String userId){
+   /*  FootService footService= (FootService)beanFactory.getBean("remoteServer");
+        System.out.println(footService.hello("111"));*/
+
      /* ValueOperations valueOperations= template.opsForValue();
       valueOperations.set("City","chengdu",30, TimeUtil.SECONDS);*/
         // redisUtil.saveCacheString("121","rfasfkasfh",300);
@@ -37,8 +47,8 @@ public class RedisService {
 
    //    RedisUtil.saveCache("zhongguo:chengdu:shuangliu","hello");
   //    String str=   RedisUtil.getCache("zhongguo:chengdu:shuangliu");
-        List<City> cities=redisDao.findAllCity();
-        City city=cities.get(0);
+     //  List<City> cities=redisDao.findAllCity();
+      //  City city=cities.get(0);
      //   RedisUtils.redisInstance().saveCache("11",city,30, TimeUnit.SECONDS);
      //  RedisUtil.redisInstance().saveCache("City",cities);
       //  RedisUtils.saveCacheString("jar","11",30);
@@ -46,9 +56,18 @@ public class RedisService {
         if (c!=null){
             System.out.println(c.toString());
         }*/
-        String uername=redisDao.findUserName();
-        logger.info("登录者姓名 ,username:"+uername);
-        return uername;
+     //   System.out.println(helloResource.testPrimitiveType());
+       HelloResource helloResource= (HelloResource) beanFactory.getBean("restfulReferer");
+        System.out.println("resful协议："+helloResource.testPrimitiveType());
+
+
+       List<City> list=redisMysqlDao.findAllCity();
+        System.out.println(list.get(0).toString());
+  /*     List<City> list1=redisOracleDao.findAllCity();
+        System.out.println(list1.get(0).toString());*/
+    //    String uername=redisDao.findUserName();
+     //   logger.info("登录者姓名 ,username:"+uername);
+        return list;
     }
 
 }

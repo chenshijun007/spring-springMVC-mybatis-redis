@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanboard.dao.mysql.RedisDao">
+    <select id="findUserName" resultType="String">
+         SELECT  username from user where id ='1'
+    </select>
+
+    <select id="findAllCity" resultType="com.hanboard.model.City" databaseId="mysql">
+     SELECT
+       City.id as id,
+        City.cityName as cityName,
+        City.cityNum as cityNum
+       FROM City
+    </select >
+
+    <select id="findAllCity" resultType="com.hanboard.model.City" databaseId="oracle">
+        SELECT
+        City.ID as id,
+       City.LOGON_NAME as cityName,
+       City.USER_NAME as cityNum
+        FROM SYSTEM_ACCOUT City
+    </select >
+</mapper>

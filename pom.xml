@@ -129,11 +129,6 @@
 
     <!--打印日志-->
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-    </dependency>
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>1.7.21</version>
@@ -187,7 +182,23 @@
       <version>5.1.40</version>
     </dependency>
 
-<!--c3p0包-->
+
+    <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc6</artifactId>
+      <version>12.1.0.1-atlassian-hosted</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.oracle.jdbc</groupId>
+      <artifactId>com.springsource.oracle.jdbc</artifactId>
+      <version>10.2.0.2</version>
+    </dependency>
+
+
+    <!--c3p0包-->
     <dependency>
       <groupId>com.mchange</groupId>
       <artifactId>c3p0</artifactId>
@@ -208,10 +219,72 @@
       <version>1.0</version>
     </dependency>
 
+
+    <!--com.hanboard.motanotan RPC 服务需要用到的包-->
+    <dependency>
+      <groupId>com.weibo</groupId>
+      <artifactId>motan-core</artifactId>
+      <version>RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.weibo</groupId>
+      <artifactId>motan-transport-netty</artifactId>
+      <version>RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- only needed for spring-based features -->
+    <dependency>
+      <groupId>com.weibo</groupId>
+      <artifactId>motan-springsupport</artifactId>
+      <version>RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.weibo</groupId>
+      <artifactId>motan-registry-consul</artifactId>
+      <version>RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.weibo</groupId>
+      <artifactId>motan-protocol-restful</artifactId>
+      <version>RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
   </dependencies>
-
-
-
 
   <build>
     <!--将mybatis的数据库查询的xml打进包里-->

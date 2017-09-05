@@ -43,7 +43,7 @@
     </bean>
 
     <!-- 扫描除了Controller之外的注解-->
-    <context:component-scan base-package="com.hanboard.*">
+    <context:component-scan base-package="com.hanboard.*,com.hanboard.motan.*">
         <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
         <context:exclude-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller"/>
@@ -81,16 +81,77 @@
 
     </bean>
 
+    <!--数据源的配置-->
+    <bean id="dataOracleSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.oracle.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.oracle.url}"/>
+        <property name="user" value="${jdbc.oracle.username}"/>
+        <property name="password" value="${jdbc.oracle.password}"/>
+        <!--连接池中保留的最小连接数。 -->
+        <property name="minPoolSize" value="${minPoolSize.count}"/>
+        <!--连接池中保留的最大连接数。Default: 15 -->
+        <property name="maxPoolSize" value="${maxPoolSize.count}"/>
+        <!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
+        <property name="initialPoolSize" value="${initialPoolSize.count}"/>
+        <!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+        <property name="maxIdleTime" value="${maxIdleTime}"/>
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+        <property name="acquireIncrement" value="${acquireIncrement.count}"/>
+        <!--JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements 属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。
+            如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
+        <property name="maxStatements" value="${maxStatements}"/>
+        <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+        <property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}"/>
+        <!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
+        <property name="acquireRetryAttempts" value="${acquireRetryAttempts}"/>
+        <!--获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍 有效保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试
+            获取连接失败后该数据源将申明已断开并永久关闭。Default: false -->
+        <property name="breakAfterAcquireFailure" value="${breakAfterAcquireFailure}"/>
+        <!--因性能消耗大请只在需要的时候使用它。如果设为true那么在每个connection提交的时候都将校验其 有效性。建议使用idleConnectionTestPeriod或automaticTestTable
+            等方法来提升连接测试的性能。Default: false -->
+        <property name="testConnectionOnCheckout" value="${testConnectionOnCheckout}"/>
+
+    </bean>
+
     <!-- mybatis 配置 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath*:/map/redis-mapper.xml"/>
+        <property name="databaseIdProvider" ref="databaseIdProvider" />
+        <property name="mapperLocations" value="classpath*:/map/mysql/redis-mapper.xml"/>
+    </bean>
+
+    <bean id="sqlOracleSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataOracleSource"/>
+        <property name="databaseIdProvider" ref="databaseIdProvider" />
+        <property name="mapperLocations" value="classpath*:/map/oracle/redis-mapper.xml"/>
     </bean>
 
     <!-- mybatis 扫描 mapper 对应类的配置  多个包的扫描-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.hanboard.dao"/>
+        <property name="basePackage" value="com.hanboard.dao.mysql"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.hanboard.dao.oracle"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlOracleSessionFactory"/>
+    </bean>
+
+
+    <bean id="vendorProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+                <prop key="Oracle">oracle</prop>
+                <prop key="MySQL">mysql</prop>
+                <prop key="DB2">db2</prop>
+                <prop key="Adaptive Server Enterprise">sybase</prop>
+                <prop key="SQL Server">sqlserver</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+        <property name="properties" ref="vendorProperties" />
     </bean>
 
     <!-- 事务配置 -->
@@ -100,4 +161,6 @@
     </bean>
 
     <import resource="classpath*:spring/spring-redis.xml"></import>
+    <import resource="classpath*:motan/motan-server.xml"></import>
+    <import resource="classpath*:motan/motan-client.xml"></import>
 </beans>
