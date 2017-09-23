@@ -5,12 +5,15 @@ import com.hanboard.dao.mysql.RedisDao;
 import com.hanboard.dao.oracle.RedisOracleDao;
 import com.hanboard.model.City;
 import com.hanboard.motan.HelloResource;
+import com.hanboard.util.RedisUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -33,8 +36,13 @@ public class RedisService {
     @Autowired
     RedisOracleDao redisOracleDao;
 
+    @Resource(name="redisTemplate")
+    RedisTemplate redisTemplate;
+
  //  @Cacheable(key = "#userId",value = "andCache")
     public List<City> redisSelect(String userId){
+
+       // redisTemplate.opsForValue().set("1","1111");
    /*  FootService footService= (FootService)beanFactory.getBean("remoteServer");
         System.out.println(footService.hello("111"));*/
 
@@ -45,7 +53,7 @@ public class RedisService {
         //  redisUtil.cacheList("11","asdads",300);
       //  RedisUtil.redisInstance().deleteCache("City");
 
-   //    RedisUtil.saveCache("zhongguo:chengdu:shuangliu","hello");
+       RedisUtil.saveCache("zhongguo:chengdu:shuangliu","hello");
   //    String str=   RedisUtil.getCache("zhongguo:chengdu:shuangliu");
      //  List<City> cities=redisDao.findAllCity();
       //  City city=cities.get(0);
@@ -57,10 +65,10 @@ public class RedisService {
             System.out.println(c.toString());
         }*/
      //   System.out.println(helloResource.testPrimitiveType());
-       HelloResource helloResource= (HelloResource) beanFactory.getBean("restfulReferer");
+  /*     HelloResource helloResource= (HelloResource) beanFactory.getBean("restfulReferer");
         System.out.println("resful协议："+helloResource.testPrimitiveType());
 
-
+*/
        List<City> list=redisMysqlDao.findAllCity();
         System.out.println(list.get(0).toString());
   /*     List<City> list1=redisOracleDao.findAllCity();

@@ -81,7 +81,7 @@
     <listener-class>com.hanboard.motan.MotanServletContextListener</listener-class>
   </listener>
   <!--首页初始化-->
-  <welcome-file-list>
+<!--  <welcome-file-list>
     <welcome-file>/test.jsp</welcome-file>
-  </welcome-file-list>
+  </welcome-file-list>-->
 </web-app>

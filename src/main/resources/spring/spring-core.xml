@@ -37,6 +37,7 @@
                 <!-- 这里支持多种寻址方式：classpath和file -->
                 <value>classpath:config/local.properties</value>
                 <value>classpath:config/redis.properties</value>
+                <value>classpath:config/redis-cluster.properties</value>
                 <!-- 推荐使用file的方式引入，这样可以将配置和代码分离 -->
             </list>
         </property>
@@ -161,6 +162,6 @@
     </bean>
 
     <import resource="classpath*:spring/spring-redis.xml"></import>
-    <import resource="classpath*:motan/motan-server.xml"></import>
-    <import resource="classpath*:motan/motan-client.xml"></import>
+ <!--   <import resource="classpath*:motan/motan-server.xml"></import>
+    <import resource="classpath*:motan/motan-client.xml"></import>-->
 </beans>
