@@ -69,7 +69,8 @@ public class RedisUtil {
     public static void saveCache(String key, String value) {
         try {
        // redisTemplate.boundValueOps("KE:"+1111).set("WODE");
-            redisTemplate.opsForValue().set(key, value);
+        //    redisTemplate.opsForValue().set(key, value);
+            System.out.println("判断是否存在"+redisTemplate.opsForValue().setIfAbsent(key,value));
         } catch (Exception e) {
             logger.error("字符串添加失败!" + e.getMessage());
             throw new RedisException("添加redis缓存失败!");
@@ -242,4 +243,7 @@ public class RedisUtil {
     }
 
 
+    public static Boolean isExists(String key) {
+        return redisTemplate.hasKey(key);
+    }
 }

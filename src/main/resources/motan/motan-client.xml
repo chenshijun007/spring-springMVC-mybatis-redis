@@ -4,33 +4,7 @@
        xmlns:motan="http://api.weibo.com/schema/motan"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
    http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
-   <!-- <motan:protocol  name="restful" endpointFactory="netty" />
+
     <motan:registry regProtocol="consul" name="my_consul" address="localhost:8500"/>
-
-    <motan:basicReferer requestTimeout="200" accessLog="false"
-                        retries="2" registry="my_consul"
-                        id="clientBasicConfig"/>
-
-    <motan:referer  interface="com.hanboard.motan.HelloResource" id="remoteServer" basicReferer="clientBasicConfig"></motan:referer>
--->
-<!--
-   <motan:referer interface="com.hanboard.motan.FootService" id="remoteServer" registry="my_consul"></motan:referer>
--->
-<!--    <motan:registry regProtocol="direct" name="registry" address="127.0.0.1:8004"/>-->
-    <motan:registry regProtocol="consul" name="my_consul" address="127.0.0.1:8500"/>
-
-    <!-- restful 协议 -->
-    <motan:protocol id="restfulProtocol" name="restful" endpointFactory="netty"/>
-
-    <!-- 通用referer基础配置 -->
-    <motan:basicReferer requestTimeout="1000" group="motan-demo-rpc" module="motan-demo-rpc"
-                        application="myMotanDemo" protocol="restfulProtocol" registry="my_consul"
-                        id="motanTestClientBasicConfig" />
-
-    <!-- 使用 restful 协议-->
-    <motan:referer id="restfulReferer" interface="com.hanboard.motan.HelloResource"
-                   basicReferer="motanTestClientBasicConfig"/>
-  <!--  &lt;!&ndash; 使用 motan 协议&ndash;&gt;
-    <motan:referer id="motanReferer" interface="com.hanboard.motan.HelloResource"
-                   registry="registry2" protocol="motanProtocol" basicReferer="motanTestClientBasicConfig"/>-->
+    <motan:referer id="remoteService" interface="com.hanboard.motan.FootService" registry="my_consul"/>
 </beans>

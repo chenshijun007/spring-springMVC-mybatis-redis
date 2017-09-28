@@ -24,6 +24,8 @@ public class RedisController {
     @ResponseBody
     public List<City> redisSelect(){
         String id="1111";
-      return  redisService.redisSelect(id);
+        redisService.updateTrans();
+        return null;
+     // return  redisService.redisSelect(id);
     }
 }

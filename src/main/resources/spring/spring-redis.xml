@@ -10,6 +10,8 @@
        http://www.springframework.org/schema/cache
        http://www.springframework.org/schema/cache/spring-cache.xsd">
 
+
+
     <!-- 配置JedisPoolConfig相关参数 -->
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxIdle" value="${spring.redis.pool.maxIdle}" />
@@ -40,11 +42,6 @@
         </property>
         <!-- 使用JacksonJsonRedisSerializer需要引入jar包：barchart-wrap-jackson-1.8.6-build001.jar -->
         <!-- JacksonJsonRedisSerializer 需要一个有参的构造函数，因此需要配置constructor-arg -->
-        <property name="hashValueSerializer">
-            <bean class="org.springframework.data.redis.serializer.JacksonJsonRedisSerializer">
-                <constructor-arg type="java.lang.Class" value="java.lang.Object"></constructor-arg>
-            </bean>
-        </property>
     </bean>
 
     <bean class="redis.clients.jedis.JedisPool">
@@ -62,6 +59,11 @@
         <property name="defaultExpiration" value="300"/>
     </bean>
 
+    <!-- session redis cache config -->
+    <bean id="redisHttpSessionConfiguration"
+          class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+        <property name="maxInactiveIntervalInSeconds" value="6000"></property> <!--单位秒-->
+    </bean>
     <!-- 开启Spring缓存 -->
     <cache:annotation-driven cache-manager="cacheManager"/>
 

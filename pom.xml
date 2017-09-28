@@ -152,6 +152,13 @@
     </dependency>
 
     <!--redis需用的包-->
+
+    <dependency>
+      <groupId>org.springframework.session</groupId>
+      <artifactId>spring-session-data-redis</artifactId>
+      <version>1.2.0.RELEASE</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-redis</artifactId>
@@ -213,11 +220,11 @@
 
   </dependency>
 
-    <dependency>
+  <!--  <dependency>
       <groupId>redis</groupId>
       <artifactId>spring-redis-util</artifactId>
       <version>1.0</version>
-    </dependency>
+    </dependency>-->
 
 
     <!--com.hanboard.motanotan RPC 服务需要用到的包-->
@@ -284,6 +291,34 @@
         </exclusion>
       </exclusions>
     </dependency>
+
+
+    <dependency>
+      <groupId>com.hanboard.redis</groupId>
+      <artifactId>redis-common</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <!-- atomikos -->
+    <dependency>
+      <groupId>com.atomikos</groupId>
+      <artifactId>transactions-jdbc</artifactId>
+      <version>3.7.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.transaction</groupId>
+      <artifactId>jta</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+    <!-- cglib -->
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib-nodep</artifactId>
+      <version>3.2.2</version>
+    </dependency>
+
   </dependencies>
 
   <build>

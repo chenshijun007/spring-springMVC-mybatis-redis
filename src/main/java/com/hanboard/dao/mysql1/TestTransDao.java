@@ -1,16 +1,14 @@
-package com.hanboard.dao.mysql;
+package com.hanboard.dao.mysql1;
 
 import com.hanboard.model.City;
 
 import java.util.List;
 
 /**
- * Created by csj on 2017/8/16.
+ * Created by csj on 2017/9/26.
  */
-public interface RedisDao {
-
+public interface TestTransDao {
     String findUserName();
-   void  updateUserName();
     List<City> findAllCity();
-
+    void updateUserName();
 }
