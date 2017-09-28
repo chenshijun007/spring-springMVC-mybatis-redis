@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:motan="http://api.weibo.com/schema/motan"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+   http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
+ <!-- service implemention bean -->
+
+ <!-- exporting service by Motan -->
+
+ <motan:registry   regProtocol="consul"  name="my_consul" address="localhost:8500"/>
+  <bean id="serviceImpl" class="com.hanboard.motan.FootServiceImpl"/>
+ <motan:service interface="com.hanboard.motan.FootService" ref="serviceImpl" registry="my_consul" export="8002" />
+</beans>

@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>spring-redis</groupId>
   <artifactId>redis</artifactId>
@@ -129,11 +129,6 @@
 
     <!--打印日志-->
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-    </dependency>
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>1.7.21</version>
@@ -157,6 +152,13 @@
     </dependency>
 
     <!--redis需用的包-->
+
+    <dependency>
+      <groupId>org.springframework.session</groupId>
+      <artifactId>spring-session-data-redis</artifactId>
+      <version>1.2.0.RELEASE</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-redis</artifactId>
@@ -187,7 +189,23 @@
       <version>5.1.40</version>
     </dependency>
 
-<!--c3p0包-->
+
+    <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc6</artifactId>
+      <version>12.1.0.1-atlassian-hosted</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.oracle.jdbc</groupId>
+      <artifactId>com.springsource.oracle.jdbc</artifactId>
+      <version>10.2.0.2</version>
+    </dependency>
+
+
+    <!--c3p0包-->
     <dependency>
       <groupId>com.mchange</groupId>
       <artifactId>c3p0</artifactId>
@@ -196,35 +214,125 @@
 
 
     <dependency>
-    <groupId>org.codehaus.jackson</groupId>
-    <artifactId>jackson-mapper-asl</artifactId>
-    <version>1.9.4</version>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.4</version>
 
-  </dependency>
+    </dependency>
+
+    <!--  <dependency>
+        <groupId>redis</groupId>
+        <artifactId>spring-redis-util</artifactId>
+        <version>1.0</version>
+      </dependency>-->
+
+
+    <!--com.hanboard.motanotan RPC 服务需要用到的包-->
+    <dependency>
+      <groupId>com.weibo</groupId>
+      <artifactId>motan-core</artifactId>
+      <version>RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.weibo</groupId>
+      <artifactId>motan-transport-netty</artifactId>
+      <version>RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- only needed for spring-based features -->
+    <dependency>
+      <groupId>com.weibo</groupId>
+      <artifactId>motan-springsupport</artifactId>
+      <version>RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
 
     <dependency>
-      <groupId>redis</groupId>
-      <artifactId>spring-redis-util</artifactId>
-      <version>1.0</version>
+      <groupId>com.weibo</groupId>
+      <artifactId>motan-registry-consul</artifactId>
+      <version>RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.weibo</groupId>
+      <artifactId>motan-protocol-restful</artifactId>
+      <version>RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.hanboard.redis</groupId>
+      <artifactId>redis-common</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <!-- atomikos -->
+    <dependency>
+      <groupId>com.atomikos</groupId>
+      <artifactId>transactions-jdbc</artifactId>
+      <version>3.7.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.transaction</groupId>
+      <artifactId>jta</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+    <!-- cglib -->
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib-nodep</artifactId>
+      <version>3.2.2</version>
     </dependency>
 
   </dependencies>
 
-
-
-
   <build>
     <!--将mybatis的数据库查询的xml打进包里-->
-   <!-- <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-        </includes>
-        <filtering>false</filtering>
-      </resource>
-    </resources>-->
- <finalName>spring-redis</finalName>
+    <!-- <resources>
+       <resource>
+         <directory>src/main/java</directory>
+         <includes>
+           <include>**/*.xml</include>
+         </includes>
+         <filtering>false</filtering>
+       </resource>
+     </resources>-->
+    <finalName>spring-redis</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

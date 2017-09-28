@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 日志格式 -->
+    <property name="log_format" value="%d [%t] %-5p [%c:%L] - %m%n"/>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log_format}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 按时间滚动的策略生成日志 -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.base:-..}/logs/hbd/edu-%d{yyyy-MM-dd}.%i.log.zip
+            </fileNamePattern>
+            <!-- 日志归档文件保存天数 -->
+            <maxHistory>365</maxHistory>
+            <!-- 每个日志文件最大10M -->
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log_format}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 日志入库的配置 -->
+    <!--<appender name="db" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
+            <dataSource class="com.mchange.v2.c3p0.ComboPooledDataSource">
+                <driverClass>${jdbc.driver}</driverClass>
+                <jdbcUrl>${jdbc.url}</jdbcUrl>
+                <user>edulog</user>
+                <password>edulog</password>
+            </dataSource>
+        </connectionSource>
+        <filter class="com.hanboard.platform.framework.utils.log.DBLogFilter"/>
+    </appender>-->
+
+    <!-- 通过环境变量读取运行环境值，local、dev、test、product -->
+    <root  level="DEBUG">
+        <appender-ref ref="console"/>
+         <appender-ref ref="file"/>
+    </root>
+   <!-- <root level="INFO">
+        <appender-ref ref="file"/>
+    </root>
+    <logger name="com.hanboard" level="DEBUG">
+        <appender-ref ref="db"/>
+    </logger>-->
+</configuration>
