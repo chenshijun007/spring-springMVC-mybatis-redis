@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by csj on 2017/8/24.
  */
 public class FootServiceImpl implements FootService {
+
     @Autowired
     RedisDao redisDao;
+
     @Override
     public String hello(String name) {
         System.out.println(name+"实现接口ceshi");

@@ -101,5 +101,5 @@
 
     <import resource="classpath*:spring/spring-redis.xml"></import>
     <import resource="classpath*:motan/motan-server.xml"></import>
-    <import resource="classpath*:motan/motan-client.xml"></import>
+<!--    <import resource="classpath*:motan/motan-client.xml"></import>-->
 </beans>

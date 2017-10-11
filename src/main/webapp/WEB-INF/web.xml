@@ -6,7 +6,7 @@
 
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring/spring-core.xml</param-value>
+    <param-value>classpath:spring/spring-core.xml,classpath*:mq/activemq.xml</param-value>
   </context-param>
 
   <!-- Spring的ApplicationContext 载入 -->

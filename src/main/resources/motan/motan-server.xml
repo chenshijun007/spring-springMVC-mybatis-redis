@@ -8,7 +8,7 @@
 
  <!-- exporting service by Motan -->
 
- <motan:registry   regProtocol="consul"  name="my_consul" address="localhost:8500"/>
+ <motan:registry   regProtocol="consul"  name="my_consul" address="127.0.0.1:8500"/>
   <bean id="serviceImpl" class="com.hanboard.motan.FootServiceImpl"/>
  <motan:service interface="com.hanboard.motan.FootService" ref="serviceImpl" registry="my_consul" export="8002" />
 </beans>

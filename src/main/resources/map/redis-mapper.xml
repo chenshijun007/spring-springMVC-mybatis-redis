@@ -2,7 +2,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hanboard.dao.RedisDao">
     <select id="findUserName" resultType="String">
-         UPDATE  user SET username="王麻子" where id ='2'
+         UPDATE  user SET username="王麻" where id ='2'
     </select>
 
     <select id="findAllCity" resultType="com.hanboard.model.City">
