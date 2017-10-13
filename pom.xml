@@ -251,6 +251,15 @@
       </exclusions>
     </dependency>
 
+
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.4</version>
+    </dependency>
+
+
     <!-- only needed for spring-based features -->
     <dependency>
       <groupId>com.weibo</groupId>
@@ -318,6 +327,12 @@
       <artifactId>cglib-nodep</artifactId>
       <version>3.2.2</version>
     </dependency>
+    <!--消息中间件的jar包-->
+<!--    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-all</artifactId>
+      <version>5.15.0</version>
+    </dependency>-->
 
   </dependencies>
 

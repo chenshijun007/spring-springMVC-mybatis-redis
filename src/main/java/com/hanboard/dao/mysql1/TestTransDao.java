@@ -10,5 +10,5 @@ import java.util.List;
 public interface TestTransDao {
     String findUserName();
     List<City> findAllCity();
-    void updateUserName();
+    void updateUserName(String name);
 }

@@ -2,12 +2,8 @@ package com.hanboard.service;
 
 
 import com.hanboard.dao.mysql.RedisDao;
-import com.hanboard.dao.mysql1.TestTransDao;
-import com.hanboard.dao.oracle.RedisOracleDao;
 import com.hanboard.model.City;
 
-import com.hanboard.motan.FootService;
-import com.hanboard.redis.util.RedisUtils;
 import com.hanboard.util.RedisUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
@@ -23,18 +19,21 @@ import java.util.List;
  * Created by csj on 2017/8/16.
  */
 @Service
+@Transactional
 public class RedisService {
     static Logger logger =Logger.getLogger(RedisService.class);
 
 
     @Autowired
     RedisDao redisMysqlDao;
+/*
 
     @Autowired
     TestTransDao testTransDao;
 
     @Autowired
     private BeanFactory beanFactory;
+*/
 
 
  //  @Cacheable(key = "#userId",value = "andCache")
@@ -80,12 +79,11 @@ public class RedisService {
 
 
     public void updateTrans(){
-      //  FootService footService= (FootService)beanFactory.getBean("remoteService");
-      //  System.out.println(footService.hello("111"));
-        testTransDao.updateUserName();
-        redisMysqlDao.updateUserName();
-       System.out.println(redisMysqlDao.findAllCity());
-
+      // FootService footService= (FootService)beanFactory.getBean("remoteService");
+      // System.out.println(footService.hello("111"));
+      //  testTransDao.updateUserName("zhangsan1");
+        redisMysqlDao.updateUserName("dou1");
+   //   System.out.println(redisMysqlDao.findAllCity());
     /*
         redisMysqlDao.updateUserName();
       System.out.println(redisMysqlDao.findAllCity());*/

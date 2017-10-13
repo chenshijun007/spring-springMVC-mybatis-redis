@@ -1,7 +1,9 @@
 package com.hanboard.controller;
 
 import com.hanboard.model.City;
+import com.hanboard.service.DataService;
 import com.hanboard.service.RedisService;
+import com.hanboard.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,12 @@ public class RedisController {
     @Autowired
     RedisService redisService;
 
+    @Autowired
+    DataService dataService;
+
+    @Autowired
+    TransactionService transactionService;
+
     @RequestMapping(value = "select",method = RequestMethod.GET)
     @ResponseBody
     public List<City> redisSelect(){
@@ -27,5 +35,19 @@ public class RedisController {
         redisService.updateTrans();
         return null;
      // return  redisService.redisSelect(id);
+    }
+
+    /**
+     * 测试多数据源的事务
+     */
+    @RequestMapping(value = "data",method = RequestMethod.GET)
+    @ResponseBody
+    public void dataTest(){
+
+//        dataService.dataCas();
+//        dataService.dataTest();
+
+        transactionService.transService();
+
     }
 }

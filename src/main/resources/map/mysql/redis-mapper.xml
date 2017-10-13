@@ -5,7 +5,7 @@
          SELECT  username from user where id ='1'
     </select>
     <update id="updateUserName" >
-        UPDATE  user  set  username="张三" where id ='1'
+        UPDATE  user  set  username=#{name} where id ='1'
     </update>
 
  <!--   <select id="findAllCity" resultType="com.hanboard.model.City" databaseId="mysql">

@@ -6,7 +6,8 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/rest")
-public interface HelloResource {
+public interface 
+HelloResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     List<User> hello(@CookieParam("uid") int uid);

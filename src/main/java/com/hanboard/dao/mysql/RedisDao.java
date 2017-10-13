@@ -10,7 +10,7 @@ import java.util.List;
 public interface RedisDao {
 
     String findUserName();
-   void  updateUserName();
+   void  updateUserName(String  name);
     List<City> findAllCity();
 
 }
